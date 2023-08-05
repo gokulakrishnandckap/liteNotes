@@ -1,0 +1,33 @@
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            {{ __('notes') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-10xl mx-auto sm:px-6 lg:px-8">
+            <div class="my-6 p-6 bg-white border-b border-gray-200 shadow-sm sm:rounded-lg">
+
+                {{-- @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach --}}
+
+                <form action="{{ route('notes.store') }}" method="post">
+                    @csrf
+                    <input 
+                        type="text"
+                        name="title" 
+                        placeholder="Title" 
+                        class="w-full" autocompleted="off"">
+
+                    <textarea name="text" id=""rows="10" placeholder="Start typing here.." class="w-full mt-6"></textarea>
+                    @error('text')
+                    <div class="text-red-600 text-sm">{{ $message }}</div>   
+                @enderror
+                    <button class="mt-6">Save Note</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</x-app-layout>
